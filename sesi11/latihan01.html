@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membaca Data JSon 01</title>
+</head>
+<body>
+
+    Nama = <span id="txNAMA"></span><br>
+    Alamat = <div id="txALAMAT"></div>
+    TGL Lahir = <input type="date" id="txTGL">
+
+    <div id="TampilData"></div>
+
+    <table><tr></tr><th>#</th> <th>Nama</th><th>Alamat</th><th>TGL Lahir</th></th>
+
+    <tr>
+        <th>#</td>
+        <th>Nama</td>
+        <th>Alamat</td>
+        <th>TGL Lahir</td>
+    
+    </tr>
+    </table>
+    
+    <script>
+        const jsHTTP = new XMLHttpRequest();
+        jsHTTP.open("GET","http://localhost/pwu/sesi11/latihan01.php");
+        jsHTTP.send();
+
+        jsHTTP.onload = function(){
+            const dt = JSON.parse(this.responseText);
+            console.log(dt);
+            let tx = "<h3>List Data</h3";
+            tx +="<table><tr></tr><th>#</th> <th>Nama</th><th>Alamat</th><th>TGL Lahir</th></th>"
+            for(let i=0; i<dt.lengith;i++){
+                tx +="<tr>"
+                tx +="  <td>NO</td>";
+                tx +="  <td>NAMA</td>";
+                tx +="  <td>ALAMAT</td>";
+                tx +="  <td>TGLLAHIR</td>";
+            }
+            tx +="</table>";
+            document.getElementById("TampilData").innerHTML = tx;
+                
+            document.getElementById("txNAMA").innerHTML = dt.nama;
+            document.getElementById("txALAMAT").innerHTML = dt.nama;
+            document.getElementById("txTGL").value = dt[2].tgl_lahir;
+
+        }
+    </script>
+    
+</body>
+</html>
+
